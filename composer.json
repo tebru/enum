@@ -1,0 +1,21 @@
+{
+    "name": "tebru/enum",
+    "description": "Simple enum library for PHP",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nate Brunette",
+            "email": "n@tebru.net"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tebru\\Enum\\": "src/",
+            "Tebru\\Enum\\Test\\": "tests/"
+        }
+    }
+}
