@@ -1,3 +1,8 @@
+[![Build Status](https://travis-ci.org/tebru/enum.svg)](https://travis-ci.org/tebru/enum)
+[![Coverage Status](https://coveralls.io/repos/tebru/enum/badge.svg?branch=master&service=github)](https://coveralls.io/github/tebru/enum?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/tebru/enum/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/tebru/enum/?branch=master)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/6d6111c3-d668-4c3a-9620-02ad504b23a4/mini.png)](https://insight.sensiolabs.com/projects/6d6111c3-d668-4c3a-9620-02ad504b23a4)
+
 Enum
 ====
 
