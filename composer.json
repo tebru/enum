@@ -8,9 +8,12 @@
             "email": "n@tebru.net"
         }
     ],
-    "require": {},
+    "require": {
+        "php": ">= 5.4"
+    },
     "require-dev": {
-        "phpunit/phpunit": "^5.0"
+        "php": ">= 5.5",
+        "phpunit/phpunit": "^4.0"
     },
     "autoload": {
         "psr-4": {
