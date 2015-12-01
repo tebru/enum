@@ -47,6 +47,17 @@ abstract class AbstractEnum implements EnumInterface, IteratorAggregate
     }
 
     /**
+     * Do a comparison to check if the enums are non-strictly equal
+     *
+     * @param AbstractEnum $enum
+     * @return bool
+     */
+    public function equals(AbstractEnum $enum)
+    {
+        return $this == $enum;
+    }
+
+    /**
      * Create a new instance of the enum
      *
      * @param string $value
