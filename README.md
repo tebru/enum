@@ -33,10 +33,10 @@ To use, extend `AbstractEnum` and implement the getConstants() method.
         public static function getConstants()
         {
             return [
-                'NORTH' => self::NORTH,
-                'EAST' => self::EAST,
-                'SOUTH' => self::SOUTH,
-                'WEST' => self::WEST,
+                self::NORTH,
+                self::EAST,
+                self::SOUTH,
+                self::WEST,
             ];
         }
     }
@@ -57,10 +57,8 @@ Reference
 There are multiple methods available on each enum
 
 * `values()` [static] A 0-indexed array of all of the enum values
-* `names()` [static] A 0-indexed array of all of the enum names
-* `valueExists($value)` [static] Returns true if the value exists
-* `nameExists($name)` [static] Returns true if the name exists
+* `exists($value)` [static] Returns true if the value exists
+* `toArray()` [static] Returns a hash with keys and values as the enum values
+* `equals(AbstractEnum $enum)` Performs a non-strict comparison of two enums
 * `getValue()` Returns the current value of the enum
-* `getName()` Returns the current name of the enum
-* `toArray()` Same as the `getConstants()` method you implement
 * `__toString()` Same as `getValue()`
