@@ -9,12 +9,11 @@ namespace Tebru\Enum\Test\Mock;
 use Tebru\Enum\AbstractEnum;
 
 /**
- * Class MockDirectionEnumKeyValueDifferent
- *
+ * Class MockEnum
  *
  * @author Nate Brunette <n@tebru.net>
  */
-class MockDirectionEnumKeyValueDifferent extends AbstractEnum
+class MockDirectionEnum extends AbstractEnum
 {
     const NORTH = 'north';
     const EAST = 'east';
@@ -29,10 +28,10 @@ class MockDirectionEnumKeyValueDifferent extends AbstractEnum
     public static function getConstants()
     {
         return [
-            'NORTH' => self::NORTH,
-            'EAST' => self::EAST,
-            'SOUTH' => self::SOUTH,
-            'WEST' => self::WEST,
+            self::NORTH,
+            self::EAST,
+            self::SOUTH,
+            self::WEST,
         ];
     }
 }

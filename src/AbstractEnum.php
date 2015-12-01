@@ -29,7 +29,7 @@ abstract class AbstractEnum implements EnumInterface, IteratorAggregate
      */
     public function __construct($value)
     {
-        if (!static::valueExists($value)) {
+        if (!static::exists($value)) {
             throw new RuntimeException(sprintf('%s is not a valid value for this enum.', $value));
         }
 
@@ -63,20 +63,9 @@ abstract class AbstractEnum implements EnumInterface, IteratorAggregate
      * @param string $value
      * @return bool
      */
-    public static function valueExists($value)
+    public static function exists($value)
     {
         return in_array($value, static::values());
-    }
-
-    /**
-     * Return true if the name is valid for the enum
-     *
-     * @param string $name
-     * @return bool
-     */
-    public static function nameExists($name)
-    {
-        return in_array($name, static::names());
     }
 
     /**
@@ -90,13 +79,13 @@ abstract class AbstractEnum implements EnumInterface, IteratorAggregate
     }
 
     /**
-     * Get an array of the enum keys
+     * Return enum as an array with keys matching values
      *
      * @return array
      */
-    public static function names()
+    public static function toArray()
     {
-        return array_keys(static::getConstants());
+        return array_combine(self::values(), self::values());
     }
 
     /**
@@ -110,32 +99,12 @@ abstract class AbstractEnum implements EnumInterface, IteratorAggregate
     }
 
     /**
-     * Get the current enum name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return array_search($this->getValue(), static::getConstants());
-    }
-
-    /**
-     * Return enum as an array
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        return static::getConstants();
-    }
-
-    /**
      * Return the values to be used in a loop
      *
      * @return array
      */
     public function getIterator()
     {
-        return new ArrayIterator(static::getConstants());
+        return new ArrayIterator(static::values());
     }
 }

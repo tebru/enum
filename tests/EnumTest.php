@@ -7,8 +7,7 @@
 namespace Tebru\Enum\Test;
 
 use PHPUnit_Framework_TestCase;
-use Tebru\Enum\Test\Mock\MockDirectionEnumKeyValueDifferent;
-use Tebru\Enum\Test\Mock\MockDirectionEnumKeyValueMatch;
+use Tebru\Enum\Test\Mock\MockDirectionEnum;
 
 /**
  * Class EnumTest
@@ -22,215 +21,76 @@ class EnumTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorWillThrowException()
     {
-        new MockDirectionEnumKeyValueMatch('foo');
+        new MockDirectionEnum('foo');
     }
 
     /**
-     * @dataProvider getDirectionsSame
+     * @dataProvider getDirections
      */
-    public function testCreateEnumSame($direction)
+    public function testCreateEnum($direction)
     {
-        $enum = new MockDirectionEnumKeyValueMatch($direction);
-        $this->assertInstanceOf(MockDirectionEnumKeyValueMatch::class, $enum);
+        $enum = new MockDirectionEnum($direction);
+        $this->assertInstanceOf(MockDirectionEnum::class, $enum);
     }
 
     /**
-     * @dataProvider getDirectionsDifferent
+     * @dataProvider getDirections
      */
-    public function testCreateEnumDifferent($name, $direction)
+    public function testCreateEnumStaticMethod($direction)
     {
-        $enum = new MockDirectionEnumKeyValueDifferent($direction);
-        $this->assertInstanceOf(MockDirectionEnumKeyValueDifferent::class, $enum);
+        $enum = MockDirectionEnum::create($direction);
+        $this->assertInstanceOf(MockDirectionEnum::class, $enum);
     }
 
     /**
-     * @dataProvider getDirectionsSame
+     * @dataProvider getDirections
      */
-    public function testCreateEnumStaticMethodSame($direction)
+    public function testEnumToString($direction)
     {
-        $enum = MockDirectionEnumKeyValueMatch::create($direction);
-        $this->assertInstanceOf(MockDirectionEnumKeyValueMatch::class, $enum);
-    }
-
-    /**
-     * @dataProvider getDirectionsDifferent
-     */
-    public function testCreateEnumStaticMethodDifferent($name, $direction)
-    {
-        $enum = MockDirectionEnumKeyValueDifferent::create($direction);
-        $this->assertInstanceOf(MockDirectionEnumKeyValueDifferent::class, $enum);
-    }
-
-    /**
-     * @dataProvider getDirectionsSame
-     */
-    public function testEnumToStringSame($direction)
-    {
-        $enum = new MockDirectionEnumKeyValueMatch($direction);
+        $enum = new MockDirectionEnum($direction);
         $this->assertSame($direction, (string)$enum);
     }
 
     /**
-     * @dataProvider getDirectionsDifferent
+     * @dataProvider getDirections
      */
-    public function testEnumToStringDifferent($name, $direction)
+    public function testValueExists($direction)
     {
-        $enum = new MockDirectionEnumKeyValueDifferent($direction);
-        $this->assertSame($direction, (string)$enum);
+        $this->assertTrue(MockDirectionEnum::exists($direction));
+    }
+
+    public function testGetValues()
+    {
+        $this->assertSame(['north', 'east', 'south', 'west'], MockDirectionEnum::values());
     }
 
     /**
-     * @dataProvider getDirectionsSame
+     * @dataProvider getDirections
      */
-    public function testValueExistsSame($direction)
+    public function testGetValue($direction)
     {
-        $enum = new MockDirectionEnumKeyValueMatch($direction);
-        $this->assertTrue($enum->valueExists($direction));
-    }
-
-    /**
-     * @dataProvider getDirectionsDifferent
-     */
-    public function testValueExistsDifferent($name, $direction)
-    {
-        $enum = new MockDirectionEnumKeyValueDifferent($direction);
-        $this->assertTrue($enum->valueExists($direction));
-    }
-
-    /**
-     * @dataProvider getDirectionsSame
-     */
-    public function testNameExistsSame($direction)
-    {
-        $enum = new MockDirectionEnumKeyValueMatch($direction);
-        $this->assertTrue($enum->nameExists($direction));
-    }
-
-    /**
-     * @dataProvider getDirectionsDifferent
-     */
-    public function testNameExistsDifferent($name, $direction)
-    {
-        $enum = new MockDirectionEnumKeyValueDifferent($direction);
-        $this->assertTrue($enum->nameExists($name));
-    }
-
-    /**
-     * @dataProvider getDirectionsSame
-     */
-    public function testGetValuesSame($direction)
-    {
-        $this->assertSame(['north', 'east', 'south', 'west'], MockDirectionEnumKeyValueMatch::values());
-    }
-
-    /**
-     * @dataProvider getDirectionsDifferent
-     */
-    public function testGetValuesDifferent($name, $direction)
-    {
-        $this->assertSame(['north', 'east', 'south', 'west'], MockDirectionEnumKeyValueDifferent::values());
-    }
-
-    /**
-     * @dataProvider getDirectionsSame
-     */
-    public function testGetNamesSame($direction)
-    {
-        $this->assertSame(['north', 'east', 'south', 'west'], MockDirectionEnumKeyValueMatch::names());
-    }
-
-    /**
-     * @dataProvider getDirectionsDifferent
-     */
-    public function testGetNamesDifferent($name, $direction)
-    {
-        $this->assertSame(['NORTH', 'EAST', 'SOUTH', 'WEST'], MockDirectionEnumKeyValueDifferent::names());
-    }
-    /**
-     * @dataProvider getDirectionsSame
-     */
-    public function testGetValueSame($direction)
-    {
-        $enum = new MockDirectionEnumKeyValueMatch($direction);
+        $enum = new MockDirectionEnum($direction);
         $this->assertSame($direction, $enum->getValue());
     }
 
-    /**
-     * @dataProvider getDirectionsDifferent
-     */
-    public function testGetValueDifferent($name, $direction)
+    public function testToArray()
     {
-        $enum = new MockDirectionEnumKeyValueDifferent($direction);
-        $this->assertSame($direction, $enum->getValue());
+        $this->assertSame(['north' => 'north', 'east' => 'east', 'south' => 'south', 'west' => 'west'], MockDirectionEnum::toArray());
     }
 
     /**
-     * @dataProvider getDirectionsSame
+     * @dataProvider getDirections
      */
-    public function testGetNameSame($direction)
+    public function testCanIterate($direction)
     {
-        $enum = new MockDirectionEnumKeyValueMatch($direction);
-        $this->assertSame($direction, $enum->getName());
-    }
-
-    /**
-     * @dataProvider getDirectionsDifferent
-     */
-    public function testGetNameDifferent($name, $direction)
-    {
-        $enum = new MockDirectionEnumKeyValueDifferent($direction);
-        $this->assertSame($name, $enum->getName());
-    }
-
-    /**
-     * @dataProvider getDirectionsSame
-     */
-    public function testToArraySame($direction)
-    {
-        $enum = new MockDirectionEnumKeyValueMatch($direction);
-        $this->assertSame(['north' => 'north', 'east' => 'east', 'south' => 'south', 'west' => 'west'], $enum->toArray());
-    }
-
-    /**
-     * @dataProvider getDirectionsDifferent
-     */
-    public function testToArrayDifferent($name, $direction)
-    {
-        $enum = new MockDirectionEnumKeyValueDifferent($direction);
-        $this->assertSame(['NORTH' => 'north', 'EAST' => 'east', 'SOUTH' => 'south', 'WEST' => 'west'], $enum->toArray());
-    }
-
-    /**
-     * @dataProvider getDirectionsSame
-     */
-    public function testCanIterateSame($direction)
-    {
-        $enum = new MockDirectionEnumKeyValueMatch($direction);
-        foreach ($enum as $key => $value) {
-            $this->assertTrue($enum->valueExists($value));
-            $this->assertTrue($enum->nameExists($key));
+        $enum = new MockDirectionEnum($direction);
+        foreach ($enum as $value) {
+            $this->assertTrue($enum->exists($value));
         }
     }
 
-    /**
-     * @dataProvider getDirectionsDifferent
-     */
-    public function testCanIterateDifferent($name, $direction)
-    {
-        $enum = new MockDirectionEnumKeyValueDifferent($direction);
-        foreach ($enum as $key => $value) {
-            $this->assertTrue($enum->valueExists($value));
-            $this->assertTrue($enum->nameExists($key));
-        }
-    }
-
-    public function getDirectionsSame()
+    public function getDirections()
     {
         return [['north'], ['east'], ['south'], ['west']];
-    }
-
-    public function getDirectionsDifferent()
-    {
-        return [['NORTH', 'north'], ['EAST', 'east'], ['SOUTH', 'south'], ['WEST', 'west']];
     }
 }
