@@ -9,7 +9,7 @@ namespace Tebru\Enum;
 /**
  * Interface EnumInterface
  *
- * @author Nate Brunette <nbrunett@nerdery.com>
+ * @author Nate Brunette <n@tebru.net>
  */
 interface EnumInterface
 {

@@ -13,7 +13,7 @@ use RuntimeException;
 /**
  * Class AbstractEnum
  *
- * @author Nate Brunette <nbrunett@nerdery.com>
+ * @author Nate Brunette <n@tebru.ent>
  */
 abstract class AbstractEnum implements EnumInterface, IteratorAggregate
 {
