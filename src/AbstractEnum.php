@@ -114,6 +114,24 @@ abstract class AbstractEnum implements EnumInterface, IteratorAggregate
     }
 
     /**
+     * Allow enum instantiation by magic method
+     *
+     * @param string $name
+     * @param $arguments
+     * @return static
+     */
+    public static function __callStatic($name, $arguments)
+    {
+        $constant = @constant(sprintf('static::%s', $name));
+
+        if (null === $constant) {
+            throw new \BadMethodCallException(sprintf('Could not find constant "%s" for class "%s"', $name, static::class));
+        }
+
+        return new static($constant);
+    }
+
+    /**
      * Return the values to be used in a loop
      *
      * @return ArrayIterator

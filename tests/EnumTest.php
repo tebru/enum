@@ -42,6 +42,20 @@ class EnumTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(MockDirectionEnum::class, $enum);
     }
 
+    public function testCreateEnumMagicMethod()
+    {
+        $this->assertInstanceOf(MockDirectionEnum::class, MockDirectionEnum::EAST());
+    }
+
+    /**
+     * @expectedException \BadMethodCallException
+     * @expectedExceptionMessage Could not find constant "FOO" for class "Tebru\Enum\Test\Mock\MockDirectionEnum"
+     */
+    public function testCreateEnumMagicMethodException()
+    {
+        $this->assertInstanceOf(MockDirectionEnum::class, MockDirectionEnum::FOO());
+    }
+
     /**
      * @dataProvider getDirections
      */

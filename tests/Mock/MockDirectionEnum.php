@@ -11,6 +11,10 @@ use Tebru\Enum\AbstractEnum;
 /**
  * Class MockEnum
  *
+ * @method static $this NORTH()
+ * @method static $this EAST()
+ * @method static $this SOUTH()
+ * @method static $this WEST()
  * @author Nate Brunette <n@tebru.net>
  */
 class MockDirectionEnum extends AbstractEnum
