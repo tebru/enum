@@ -45,6 +45,16 @@ Now you can create a new instance normally or using the static method.
 
     new DirectionEnum('north');
     DirectionEnum::create('north');
+    
+You can also create an instance using the __callStatic magic method.
+    
+    DirectionEnum::NORTH();
+    
+Add a hint to the enum doc block
+
+    /**
+     * @method static $this NORTH()
+     */
 
 You can also iterate over the enum
 
@@ -59,6 +69,6 @@ There are multiple methods available on each enum
 * `values()` [static] A 0-indexed array of all of the enum values
 * `exists($value)` [static] Returns true if the value exists
 * `toArray()` [static] Returns a hash with keys and values as the enum values
-* `equals(AbstractEnum $enum)` Performs a non-strict comparison of two enums
+* `equals($enum)` Performs a non-strict comparison of two enums or value comparison of a string
 * `getValue()` Returns the current value of the enum
 * `__toString()` Same as `getValue()`
