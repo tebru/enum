@@ -43,7 +43,7 @@ abstract class AbstractEnum implements EnumInterface, IteratorAggregate
      */
     public function __toString()
     {
-        return (string)$this->value;
+        return (string) $this->value;
     }
 
     /**
@@ -76,7 +76,7 @@ abstract class AbstractEnum implements EnumInterface, IteratorAggregate
      */
     public static function exists($value)
     {
-        return in_array($value, static::values());
+        return in_array($value, static::values(), true);
     }
 
     /**
@@ -112,7 +112,7 @@ abstract class AbstractEnum implements EnumInterface, IteratorAggregate
     /**
      * Return the values to be used in a loop
      *
-     * @return array
+     * @return ArrayIterator
      */
     public function getIterator()
     {
