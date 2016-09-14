@@ -54,18 +54,34 @@ class EnumTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider getDirections
      */
-    public function testEquals($direction)
+    public function testEqualsEnum($direction)
     {
         $enum = new MockDirectionEnum($direction);
         $enumCompare = new MockDirectionEnum($direction);
         $this->assertTrue($enum->equals($enumCompare));
     }
 
-    public function testNotEquals()
+    /**
+     * @dataProvider getDirections
+     */
+    public function testEqualsString($direction)
+    {
+        $enum = new MockDirectionEnum($direction);
+        $enumCompare = new MockDirectionEnum($direction);
+        $this->assertTrue($enum->equals($enumCompare->getValue()));
+    }
+
+    public function testNotEqualsEnum()
     {
         $enum = new MockDirectionEnum('north');
         $enumCompare = new MockDirectionEnum('south');
         $this->assertFalse($enum->equals($enumCompare));
+    }
+
+    public function testNotEqualsString()
+    {
+        $enum = new MockDirectionEnum('north');
+        $this->assertFalse($enum->equals(MockDirectionEnum::SOUTH));
     }
 
     public function testNotStrictlyEqual()
