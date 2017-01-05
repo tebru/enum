@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2015 Nate Brunette.
+ * Copyright (c) Nate Brunette.
  * Distributed under the MIT License (http://opensource.org/licenses/MIT)
  */
 
@@ -21,7 +21,7 @@ class EnumTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructorWillThrowException()
     {
-        new MockDirectionEnum('foo');
+        MockDirectionEnum::create('foo');
     }
 
     /**
@@ -29,8 +29,8 @@ class EnumTest extends PHPUnit_Framework_TestCase
      */
     public function testCreateEnum($direction)
     {
-        $enum = new MockDirectionEnum($direction);
-        $this->assertInstanceOf(MockDirectionEnum::class, $enum);
+        $enum = MockDirectionEnum::create($direction);
+        $this->assertSame($direction, $enum->getValue());
     }
 
     /**
@@ -39,12 +39,13 @@ class EnumTest extends PHPUnit_Framework_TestCase
     public function testCreateEnumStaticMethod($direction)
     {
         $enum = MockDirectionEnum::create($direction);
-        $this->assertInstanceOf(MockDirectionEnum::class, $enum);
+        $this->assertSame($direction, $enum->getValue());
     }
 
     public function testCreateEnumMagicMethod()
     {
-        $this->assertInstanceOf(MockDirectionEnum::class, MockDirectionEnum::EAST());
+        $enum = MockDirectionEnum::EAST();
+        $this->assertSame(MockDirectionEnum::EAST, $enum->getValue());
     }
 
     /**
@@ -61,7 +62,7 @@ class EnumTest extends PHPUnit_Framework_TestCase
      */
     public function testEnumToString($direction)
     {
-        $enum = new MockDirectionEnum($direction);
+        $enum = MockDirectionEnum::create($direction);
         $this->assertSame($direction, (string)$enum);
     }
 
@@ -70,39 +71,30 @@ class EnumTest extends PHPUnit_Framework_TestCase
      */
     public function testEqualsEnum($direction)
     {
-        $enum = new MockDirectionEnum($direction);
-        $enumCompare = new MockDirectionEnum($direction);
+        $enum = MockDirectionEnum::create($direction);
+        $enumCompare = MockDirectionEnum::create($direction);
         $this->assertTrue($enum->equals($enumCompare));
-    }
-
-    /**
-     * @dataProvider getDirections
-     */
-    public function testEqualsString($direction)
-    {
-        $enum = new MockDirectionEnum($direction);
-        $enumCompare = new MockDirectionEnum($direction);
-        $this->assertTrue($enum->equals($enumCompare->getValue()));
     }
 
     public function testNotEqualsEnum()
     {
-        $enum = new MockDirectionEnum('north');
-        $enumCompare = new MockDirectionEnum('south');
+        $enum = MockDirectionEnum::create('north');
+        $enumCompare = MockDirectionEnum::create('south');
         $this->assertFalse($enum->equals($enumCompare));
     }
 
-    public function testNotEqualsString()
+    public function testStrictlyEqual()
     {
-        $enum = new MockDirectionEnum('north');
-        $this->assertFalse($enum->equals(MockDirectionEnum::SOUTH));
+        $enum = MockDirectionEnum::create('north');
+        $enumCompare = MockDirectionEnum::create('north');
+        $this->assertSame($enum, $enumCompare);
     }
 
-    public function testNotStrictlyEqual()
+    public function testStrictlyEqualCreateAndCallStatic()
     {
-        $enum = new MockDirectionEnum('north');
-        $enumCompare = new MockDirectionEnum('north');
-        $this->assertFalse($enum === $enumCompare);
+        $enum = MockDirectionEnum::create('north');
+        $enumCompare = MockDirectionEnum::NORTH();
+        $this->assertSame($enum, $enumCompare);
     }
 
     /**
@@ -123,7 +115,7 @@ class EnumTest extends PHPUnit_Framework_TestCase
      */
     public function testGetValue($direction)
     {
-        $enum = new MockDirectionEnum($direction);
+        $enum = MockDirectionEnum::create($direction);
         $this->assertSame($direction, $enum->getValue());
     }
 
@@ -137,9 +129,9 @@ class EnumTest extends PHPUnit_Framework_TestCase
      */
     public function testCanIterate($direction)
     {
-        $enum = new MockDirectionEnum($direction);
+        $enum = MockDirectionEnum::create($direction);
         foreach ($enum as $value) {
-            $this->assertTrue($enum->exists($value));
+            $this->assertTrue($enum::exists($value));
         }
     }
 

@@ -1,16 +1,17 @@
 <?php
 /*
- * Copyright (c) 2015 Nate Brunette.
+ * Copyright (c) Nate Brunette.
  * Distributed under the MIT License (http://opensource.org/licenses/MIT)
  */
 
 namespace Tebru\Enum;
 
 use ArrayIterator;
+use BadMethodCallException;
 use IteratorAggregate;
 use RuntimeException;
 
-/**
+/**v
  * Class AbstractEnum
  *
  * @author Nate Brunette <n@tebru.ent>
@@ -23,11 +24,19 @@ abstract class AbstractEnum implements EnumInterface, IteratorAggregate
     private $value;
 
     /**
+     * An array of created instances to ensure singleton
+     *
+     * @var array
+     */
+    private static $instances = [];
+
+    /**
      * Constructor
      *
      * @param string $value
+     * @throws RuntimeException If the value is not valid
      */
-    public function __construct($value)
+    final private function __construct($value)
     {
         if (!static::exists($value)) {
             throw new RuntimeException(sprintf('%s is not a valid value for this enum.', $value));
@@ -49,27 +58,31 @@ abstract class AbstractEnum implements EnumInterface, IteratorAggregate
     /**
      * Do a comparison to check if the enums are non-strictly equal
      *
-     * @param AbstractEnum|string $value
+     * @param AbstractEnum $enum
      * @return bool
      */
-    public function equals($value)
+    public function equals(AbstractEnum $enum)
     {
-        if ($value instanceof AbstractEnum) {
-            return $this == $value;
-        }
-
-        return $this->value === $value;
+        return $this->getValue() === $enum->getValue();
     }
 
     /**
      * Create a new instance of the enum
      *
      * @param string $value
-     * @return $this
+     * @return AbstractEnum
+     * @throws RuntimeException If the value is not valid
      */
     public static function create($value)
     {
-        return new static($value);
+        if (array_key_exists($value, self::$instances)) {
+            return self::$instances[$value];
+        }
+
+        $instance = new static($value);
+        self::$instances[$value] = $instance;
+
+        return $instance;
     }
 
     /**
@@ -119,16 +132,18 @@ abstract class AbstractEnum implements EnumInterface, IteratorAggregate
      * @param string $name
      * @param $arguments
      * @return static
+     * @throws RuntimeException If the value is not valid
+     * @throws BadMethodCallException If the constant doesn't exist in the class
      */
     public static function __callStatic($name, $arguments)
     {
-        $constant = @constant(sprintf('static::%s', $name));
+        $constant = @constant('static::' . $name);
 
         if (null === $constant) {
-            throw new \BadMethodCallException(sprintf('Could not find constant "%s" for class "%s"', $name, static::class));
+            throw new BadMethodCallException(sprintf('Could not find constant "%s" for class "%s"', $name, static::class));
         }
 
-        return new static($constant);
+        return self::create($constant);
     }
 
     /**
