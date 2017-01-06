@@ -57,11 +57,6 @@ Add a hint to the enum doc block
      * @method static $this NORTH()
      */
 
-You can also iterate over the enum
-
-    $enum = new DirectionEnum('north');
-    foreach ($enum as $key => $value) {}
-
 Reference
 ---------
 
