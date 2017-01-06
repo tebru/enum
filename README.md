@@ -13,54 +13,66 @@ also forces enums to be singletons.
 Installation
 ------------
 
-    composer require tebru/enum
+```bash
+composer require tebru/enum
+```
 
 Usage
 -----
 
 To use, extend `AbstractEnum` and implement the getConstants() method.
 
-    class DirectionEnum extends AbstractEnum
-    {
-        const NORTH = 'north';
-        const EAST = 'east';
-        const SOUTH = 'south';
-        const WEST = 'west';
+```php
+class DirectionEnum extends AbstractEnum
+{
+    const NORTH = 'north';
+    const EAST = 'east';
+    const SOUTH = 'south';
+    const WEST = 'west';
 
-        /**
-         * Return an array of enum class constants
-         *
-         * @return array
-         */
-        public static function getConstants()
-        {
-            return [
-                self::NORTH,
-                self::EAST,
-                self::SOUTH,
-                self::WEST,
-            ];
-        }
+    /**
+     * Return an array of enum class constants
+     *
+     * @return array
+     */
+    public static function getConstants()
+    {
+        return [
+            self::NORTH,
+            self::EAST,
+            self::SOUTH,
+            self::WEST,
+        ];
     }
+}
+```
 
 Now you can create a new instance using the static method.
 
-    DirectionEnum::create('north');
+```php
+DirectionEnum::create('north');
+```
     
 You can also create an instance using the __callStatic magic method.
-    
-    DirectionEnum::NORTH();
+
+```php
+DirectionEnum::NORTH();
+```
     
 Add a hint to the enum doc block
 
-    /**
-     * @method static $this NORTH()
-     */
+```php
+/**
+ * @method static $this NORTH()
+ */
+ ```
 
 You can also iterate over the enum
 
-    $enum = new DirectionEnum('north');
-    foreach ($enum as $key => $value) {}
+```php
+$enum = new DirectionEnum('north');
+foreach ($enum as $key => $value) {}
+```
 
 Reference
 ---------
