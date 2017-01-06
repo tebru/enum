@@ -8,7 +8,6 @@ namespace Tebru\Enum;
 
 use ArrayIterator;
 use BadMethodCallException;
-use IteratorAggregate;
 use RuntimeException;
 
 /**v
@@ -16,7 +15,7 @@ use RuntimeException;
  *
  * @author Nate Brunette <n@tebru.ent>
  */
-abstract class AbstractEnum implements EnumInterface, IteratorAggregate
+abstract class AbstractEnum implements EnumInterface
 {
     /**
      * @var string
@@ -144,15 +143,5 @@ abstract class AbstractEnum implements EnumInterface, IteratorAggregate
         }
 
         return self::create($constant);
-    }
-
-    /**
-     * Return the values to be used in a loop
-     *
-     * @return ArrayIterator
-     */
-    public function getIterator()
-    {
-        return new ArrayIterator(static::values());
     }
 }

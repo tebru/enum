@@ -124,17 +124,6 @@ class EnumTest extends PHPUnit_Framework_TestCase
         $this->assertSame(['north' => 'north', 'east' => 'east', 'south' => 'south', 'west' => 'west'], MockDirectionEnum::toArray());
     }
 
-    /**
-     * @dataProvider getDirections
-     */
-    public function testCanIterate($direction)
-    {
-        $enum = MockDirectionEnum::create($direction);
-        foreach ($enum as $value) {
-            $this->assertTrue($enum::exists($value));
-        }
-    }
-
     public function getDirections()
     {
         return [['north'], ['east'], ['south'], ['west']];
