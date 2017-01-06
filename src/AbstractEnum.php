@@ -6,7 +6,6 @@
 
 namespace Tebru\Enum;
 
-use ArrayIterator;
 use BadMethodCallException;
 use RuntimeException;
 
@@ -55,12 +54,12 @@ abstract class AbstractEnum implements EnumInterface
     }
 
     /**
-     * Do a comparison to check if the enums are non-strictly equal
+     * Do a comparison to check if the enum values are equal
      *
-     * @param AbstractEnum $enum
+     * @param EnumInterface $enum
      * @return bool
      */
-    public function equals(AbstractEnum $enum)
+    public function equals(EnumInterface $enum)
     {
         return $this->getValue() === $enum->getValue();
     }
@@ -118,7 +117,7 @@ abstract class AbstractEnum implements EnumInterface
     /**
      * Get the current enum value
      *
-     * @return string
+     * @return mixed
      */
     public function getValue()
     {
