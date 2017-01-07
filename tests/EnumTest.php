@@ -31,7 +31,7 @@ class EnumTest extends PHPUnit_Framework_TestCase
     public function testCreateEnum($direction)
     {
         $enum = MockDirectionEnum::create($direction);
-        $this->assertSame($direction, $enum->getValue());
+        self::assertSame($direction, $enum->getValue());
     }
 
     /**
@@ -40,13 +40,13 @@ class EnumTest extends PHPUnit_Framework_TestCase
     public function testCreateEnumStaticMethod($direction)
     {
         $enum = MockDirectionEnum::create($direction);
-        $this->assertSame($direction, $enum->getValue());
+        self::assertSame($direction, $enum->getValue());
     }
 
     public function testCreateEnumMagicMethod()
     {
         $enum = MockDirectionEnum::EAST();
-        $this->assertSame(MockDirectionEnum::EAST, $enum->getValue());
+        self::assertSame(MockDirectionEnum::EAST, $enum->getValue());
     }
 
     /**
@@ -55,7 +55,7 @@ class EnumTest extends PHPUnit_Framework_TestCase
      */
     public function testCreateEnumMagicMethodException()
     {
-        $this->assertInstanceOf(MockDirectionEnum::class, MockDirectionEnum::FOO());
+        self::assertInstanceOf(MockDirectionEnum::class, MockDirectionEnum::FOO());
     }
 
     /**
@@ -64,7 +64,7 @@ class EnumTest extends PHPUnit_Framework_TestCase
     public function testEnumToString($direction)
     {
         $enum = MockDirectionEnum::create($direction);
-        $this->assertSame($direction, (string)$enum);
+        self::assertSame($direction, (string)$enum);
     }
 
     /**
@@ -74,28 +74,28 @@ class EnumTest extends PHPUnit_Framework_TestCase
     {
         $enum = MockDirectionEnum::create($direction);
         $enumCompare = MockDirectionEnum::create($direction);
-        $this->assertTrue($enum->equals($enumCompare));
+        self::assertTrue($enum->equals($enumCompare));
     }
 
     public function testNotEqualsEnum()
     {
         $enum = MockDirectionEnum::create('north');
         $enumCompare = MockDirectionEnum::create('south');
-        $this->assertFalse($enum->equals($enumCompare));
+        self::assertFalse($enum->equals($enumCompare));
     }
 
     public function testStrictlyEqual()
     {
         $enum = MockDirectionEnum::create('north');
         $enumCompare = MockDirectionEnum::create('north');
-        $this->assertSame($enum, $enumCompare);
+        self::assertSame($enum, $enumCompare);
     }
 
     public function testStrictlyEqualCreateAndCallStatic()
     {
         $enum = MockDirectionEnum::create('north');
         $enumCompare = MockDirectionEnum::NORTH();
-        $this->assertSame($enum, $enumCompare);
+        self::assertSame($enum, $enumCompare);
     }
 
     /**
@@ -103,12 +103,12 @@ class EnumTest extends PHPUnit_Framework_TestCase
      */
     public function testValueExists($direction)
     {
-        $this->assertTrue(MockDirectionEnum::exists($direction));
+        self::assertTrue(MockDirectionEnum::exists($direction));
     }
 
     public function testGetValues()
     {
-        $this->assertSame(['north', 'east', 'south', 'west'], MockDirectionEnum::values());
+        self::assertSame(['north', 'east', 'south', 'west'], MockDirectionEnum::values());
     }
 
     /**
@@ -117,12 +117,12 @@ class EnumTest extends PHPUnit_Framework_TestCase
     public function testGetValue($direction)
     {
         $enum = MockDirectionEnum::create($direction);
-        $this->assertSame($direction, $enum->getValue());
+        self::assertSame($direction, $enum->getValue());
     }
 
     public function testToArray()
     {
-        $this->assertSame(['north' => 'north', 'east' => 'east', 'south' => 'south', 'west' => 'west'], MockDirectionEnum::toArray());
+        self::assertSame(['north' => 'north', 'east' => 'east', 'south' => 'south', 'west' => 'west'], MockDirectionEnum::toArray());
     }
 
     public function testMultipleEnumSingleton()
@@ -137,15 +137,15 @@ class EnumTest extends PHPUnit_Framework_TestCase
         $down = MockPointerEnum::DOWN();
         $left = MockPointerEnum::LEFT();
 
-        $this->assertSame($north, MockDirectionEnum::NORTH());
-        $this->assertSame($east, MockDirectionEnum::EAST());
-        $this->assertSame($south, MockDirectionEnum::SOUTH());
-        $this->assertSame($west, MockDirectionEnum::WEST());
+        self::assertSame($north, MockDirectionEnum::NORTH());
+        self::assertSame($east, MockDirectionEnum::EAST());
+        self::assertSame($south, MockDirectionEnum::SOUTH());
+        self::assertSame($west, MockDirectionEnum::WEST());
 
-        $this->assertSame($up, MockPointerEnum::UP());
-        $this->assertSame($right, MockPointerEnum::RIGHT());
-        $this->assertSame($down, MockPointerEnum::DOWN());
-        $this->assertSame($left, MockPointerEnum::LEFT());
+        self::assertSame($up, MockPointerEnum::UP());
+        self::assertSame($right, MockPointerEnum::RIGHT());
+        self::assertSame($down, MockPointerEnum::DOWN());
+        self::assertSame($left, MockPointerEnum::LEFT());
     }
 
     public function getDirections()
