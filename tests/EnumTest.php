@@ -8,6 +8,7 @@ namespace Tebru\Enum\Test;
 
 use PHPUnit_Framework_TestCase;
 use Tebru\Enum\Test\Mock\MockDirectionEnum;
+use Tebru\Enum\Test\Mock\MockPointerEnum;
 
 /**
  * Class EnumTest
@@ -122,6 +123,29 @@ class EnumTest extends PHPUnit_Framework_TestCase
     public function testToArray()
     {
         $this->assertSame(['north' => 'north', 'east' => 'east', 'south' => 'south', 'west' => 'west'], MockDirectionEnum::toArray());
+    }
+
+    public function testMultipleEnumSingleton()
+    {
+        $north = MockDirectionEnum::NORTH();
+        $east = MockDirectionEnum::EAST();
+        $south = MockDirectionEnum::SOUTH();
+        $west = MockDirectionEnum::WEST();
+
+        $up = MockPointerEnum::UP();
+        $right = MockPointerEnum::RIGHT();
+        $down = MockPointerEnum::DOWN();
+        $left = MockPointerEnum::LEFT();
+
+        $this->assertSame($north, MockDirectionEnum::NORTH());
+        $this->assertSame($east, MockDirectionEnum::EAST());
+        $this->assertSame($south, MockDirectionEnum::SOUTH());
+        $this->assertSame($west, MockDirectionEnum::WEST());
+
+        $this->assertSame($up, MockPointerEnum::UP());
+        $this->assertSame($right, MockPointerEnum::RIGHT());
+        $this->assertSame($down, MockPointerEnum::DOWN());
+        $this->assertSame($left, MockPointerEnum::LEFT());
     }
 
     public function getDirections()

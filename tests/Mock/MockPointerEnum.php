@@ -9,20 +9,20 @@ namespace Tebru\Enum\Test\Mock;
 use Tebru\Enum\AbstractEnum;
 
 /**
- * Class MockDirectionEnum
+ * Class MockPointerEnum
  *
- * @method static $this NORTH()
- * @method static $this EAST()
- * @method static $this SOUTH()
- * @method static $this WEST()
+ * @method static $this UP()
+ * @method static $this RIGHT()
+ * @method static $this DOWN()
+ * @method static $this LEFT()
  * @author Nate Brunette <n@tebru.net>
  */
-class MockDirectionEnum extends AbstractEnum
+class MockPointerEnum extends AbstractEnum
 {
-    const NORTH = 'north';
-    const EAST = 'east';
-    const SOUTH = 'south';
-    const WEST = 'west';
+    const UP = 'up';
+    const RIGHT = 'right';
+    const DOWN = 'down';
+    const LEFT = 'left';
 
     /**
      * Return an array of enum class constants
@@ -32,10 +32,10 @@ class MockDirectionEnum extends AbstractEnum
     public static function getConstants()
     {
         return [
-            self::NORTH,
-            self::EAST,
-            self::SOUTH,
-            self::WEST,
+            self::UP,
+            self::RIGHT,
+            self::DOWN,
+            self::LEFT,
         ];
     }
 }

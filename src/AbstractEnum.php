@@ -73,12 +73,13 @@ abstract class AbstractEnum implements EnumInterface
      */
     public static function create($value)
     {
-        if (array_key_exists($value, self::$instances)) {
-            return self::$instances[$value];
+        $class = get_called_class();
+        if (isset(self::$instances[$class][$value])) {
+            return self::$instances[$class][$value];
         }
 
         $instance = new static($value);
-        self::$instances[$value] = $instance;
+        self::$instances[$class][$value] = $instance;
 
         return $instance;
     }
