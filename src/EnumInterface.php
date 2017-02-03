@@ -30,10 +30,10 @@ interface EnumInterface
     /**
      * Do a comparison to check if the enum values are equal
      *
-     * @param EnumInterface $enum
+     * @param string $value
      * @return bool
      */
-    public function equals(EnumInterface $enum);
+    public function equals($value);
 
     /**
      * Return the value as a string
