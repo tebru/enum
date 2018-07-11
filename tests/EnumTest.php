@@ -6,7 +6,7 @@
 
 namespace Tebru\Enum\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Tebru\Enum\Test\Mock\MockDirectionEnum;
 use Tebru\Enum\Test\Mock\MockPointerEnum;
 
@@ -15,7 +15,7 @@ use Tebru\Enum\Test\Mock\MockPointerEnum;
  *
  * @author Nate Brunette <n@tebru.net>
  */
-class EnumTest extends PHPUnit_Framework_TestCase
+class EnumTest extends TestCase
 {
     /**
      * @expectedException \RuntimeException
